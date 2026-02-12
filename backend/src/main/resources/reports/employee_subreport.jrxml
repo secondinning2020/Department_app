@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="employee_subreport"
+              pageWidth="555"
+              pageHeight="802"
+              columnWidth="555"
+              leftMargin="0"
+              rightMargin="0"
+              topMargin="0"
+              bottomMargin="0">
+
+    <field name="id" class="java.lang.String"/>
+    <field name="name" class="java.lang.String"/>
+    <field name="email" class="java.lang.String"/>
+    <field name="position" class="java.lang.String"/>
+    <field name="salary" class="java.lang.Double"/>
+
+    <detail>
+        <band height="20" splitType="Stretch">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="20" backcolor="#FFFFFF"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#CCCCCC"/>
+                </graphicElement>
+            </rectangle>
+            <textField>
+                <reportElement x="10" y="2" width="80" height="16"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="2" width="150" height="16"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="260" y="2" width="150" height="16"/>
+                <textElement>
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+            </textField>
+            <textField pattern="$#,##0.00">
+                <reportElement x="420" y="2" width="125" height="16"/>
+                <textElement textAlignment="Right">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{salary}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

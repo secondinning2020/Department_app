@@ -1,0 +1,81 @@
+# Production Configuration Template
+# Configure environment variables for production deployment
+
+spring:
+  # PostgreSQL Configuration (Option 1)
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/departmentdb}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:changeme}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  
+  # MySQL Configuration (Option 2 - Uncomment to use MySQL)
+  # datasource:
+  #   url: ${DB_URL:jdbc:mysql://localhost:3306/departmentdb?useSSL=false&serverTimezone=UTC}
+  #   driver-class-name: com.mysql.cj.jdbc.Driver
+  #   username: ${DB_USERNAME:root}
+  #   password: ${DB_PASSWORD:changeme}
+  #   hikari:
+  #     maximum-pool-size: 10
+  #     minimum-idle: 5
+  
+  jpa:
+    # For PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    # For MySQL (uncomment if using MySQL)
+    # database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate # Use Flyway/Liquibase for production migrations
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  h2:
+    console:
+      enabled: false
+
+# Logging
+logging:
+  level:
+    com.enterprise.department: INFO
+    org.springframework.security: WARN
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
+  file:
+    name: logs/department-management.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Swagger (Disable in production or secure it)
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:false}
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:false}
+
+# Security
+jwt:
+  secret: ${JWT_SECRET} # MUST be set via environment variable
+  expiration: ${JWT_EXPIRATION:86400000}
+
+# Server
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+  compression:
+    enabled: true
+  http2:
+    enabled: true

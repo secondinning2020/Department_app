@@ -1,0 +1,77 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.enterprise:department-management >----------------
+[INFO] Building Department Management System 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ department-management ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ department-management ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ department-management ---
+[INFO] skip non existing resourceDirectory C:\Users\Asus\Downloads\ASPDepartment\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ department-management ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 5 source files with javac [debug release 17] to target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[78,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[92,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[113,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[128,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[142,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[179,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[193,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[178,36] cannot find symbol
+  symbol:   method generateEmployeeId()
+  location: class com.enterprise.department.util.EmployeeIdGenerator
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[220,32] cannot find symbol
+  symbol:   method existsByEmailAndIdNot(java.lang.String,java.lang.String)
+  location: variable employeeRepository of type com.enterprise.department.repository.EmployeeRepository
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[241,32] cannot find symbol
+  symbol:   method existsByEmailAndIdNot(java.lang.String,java.lang.String)
+  location: variable employeeRepository of type com.enterprise.department.repository.EmployeeRepository
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[341,33] cannot find symbol
+  symbol:   method generateEmployeeId()
+  location: variable employeeIdGenerator of type com.enterprise.department.util.EmployeeIdGenerator
+[INFO] 11 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.888 s
+[INFO] Finished at: 2026-02-11T23:58:21+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project department-management: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[78,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[92,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[113,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[128,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[142,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[179,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/ReportServiceTest.java:[193,63] unreported exception java.lang.Exception; must be caught or declared to be thrown
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[178,36] cannot find symbol
+[ERROR]   symbol:   method generateEmployeeId()
+[ERROR]   location: class com.enterprise.department.util.EmployeeIdGenerator
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[220,32] cannot find symbol
+[ERROR]   symbol:   method existsByEmailAndIdNot(java.lang.String,java.lang.String)
+[ERROR]   location: variable employeeRepository of type com.enterprise.department.repository.EmployeeRepository
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[241,32] cannot find symbol
+[ERROR]   symbol:   method existsByEmailAndIdNot(java.lang.String,java.lang.String)
+[ERROR]   location: variable employeeRepository of type com.enterprise.department.repository.EmployeeRepository
+[ERROR] /C:/Users/Asus/Downloads/ASPDepartment/backend/src/test/java/com/enterprise/department/service/EmployeeServiceImplTest.java:[341,33] cannot find symbol
+[ERROR]   symbol:   method generateEmployeeId()
+[ERROR]   location: variable employeeIdGenerator of type com.enterprise.department.util.EmployeeIdGenerator
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

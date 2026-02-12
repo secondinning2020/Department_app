@@ -1,0 +1,927 @@
+{
+    "info": {
+        "name": "Department Management System API",
+        "description": "Complete API collection for Enterprise Department & Employee Management System with JWT authentication, CRUD operations, and reporting endpoints.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "version": "1.0.0"
+    },
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+            }
+        ]
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8084",
+            "type": "string"
+        },
+        {
+            "key": "jwt_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "department_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "employee_id",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Login - Admin",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Response has token\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.token).to.exist;",
+                                    "    pm.collectionVariables.set(\"jwt_token\", jsonData.token);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"User role is ADMIN\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.role).to.eql(\"ADMIN\");",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Login with admin credentials to get JWT token"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login - HR",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"User role is HR\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.role).to.eql(\"HR\");",
+                                    "    pm.collectionVariables.set(\"jwt_token\", jsonData.token);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"hr\",\n  \"password\": \"hr123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login - Employee",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"User role is EMPLOYEE\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.role).to.eql(\"EMPLOYEE\");",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"employee\",\n  \"password\": \"emp123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Register User (Admin Only)",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"User created successfully\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.username).to.exist;",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"password123\",\n  \"email\": \"newuser@example.com\",\n  \"role\": \"EMPLOYEE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "register"
+                            ]
+                        },
+                        "description": "Register a new user (requires ADMIN role)"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Authentication endpoints for login and user registration"
+        },
+        {
+            "name": "Departments",
+            "item": [
+                {
+                    "name": "Get All Departments",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Response is array\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData).to.be.an('array');",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Departments have required fields\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    if (jsonData.length > 0) {",
+                                    "        pm.expect(jsonData[0]).to.have.property('id');",
+                                    "        pm.expect(jsonData[0]).to.have.property('name');",
+                                    "        pm.expect(jsonData[0]).to.have.property('location');",
+                                    "        pm.collectionVariables.set(\"department_id\", jsonData[0].id);",
+                                    "    }",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments"
+                            ]
+                        },
+                        "description": "Get all departments (requires authentication)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Department by ID",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Department has employees\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData).to.have.property('employees');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}"
+                            ]
+                        },
+                        "description": "Get a specific department by ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Department",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Department created\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.name).to.eql(\"Marketing\");",
+                                    "    pm.collectionVariables.set(\"department_id\", jsonData.id);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Marketing\",\n  \"location\": \"Building D\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments"
+                            ]
+                        },
+                        "description": "Create a new department (requires ADMIN or HR role)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Department",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Department updated\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.location).to.eql(\"Building E\");",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Marketing\",\n  \"location\": \"Building E\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}"
+                            ]
+                        },
+                        "description": "Update an existing department (requires ADMIN or HR role)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Department",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 204\", function () {",
+                                    "    pm.response.to.have.status(204);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}"
+                            ]
+                        },
+                        "description": "Delete a department (requires ADMIN role)"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Department management endpoints"
+        },
+        {
+            "name": "Employees",
+            "item": [
+                {
+                    "name": "Get All Employees",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Response is array\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData).to.be.an('array');",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Employees have ID in correct format\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    if (jsonData.length > 0) {",
+                                    "        pm.expect(jsonData[0].id).to.match(/^EMP\\d{3}$/);",
+                                    "        pm.collectionVariables.set(\"employee_id\", jsonData[0].id);",
+                                    "    }",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/employees",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "employees"
+                            ]
+                        },
+                        "description": "Get all employees"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Employee by ID",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Employee has all fields\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData).to.have.property('name');",
+                                    "    pm.expect(jsonData).to.have.property('email');",
+                                    "    pm.expect(jsonData).to.have.property('position');",
+                                    "    pm.expect(jsonData).to.have.property('salary');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/employees/{{employee_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "employees",
+                                "{{employee_id}}"
+                            ]
+                        },
+                        "description": "Get a specific employee by ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Employees by Department",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"All employees belong to same department\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    var deptId = pm.collectionVariables.get(\"department_id\");",
+                                    "    jsonData.forEach(function(emp) {",
+                                    "        pm.expect(emp.departmentId).to.eql(deptId);",
+                                    "    });",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}/employees",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}",
+                                "employees"
+                            ]
+                        },
+                        "description": "Get all employees in a specific department"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Employee",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Employee ID auto-generated\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.id).to.match(/^EMP\\d{3}$/);",
+                                    "    pm.collectionVariables.set(\"employee_id\", jsonData.id);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Employee created with correct data\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.name).to.eql(\"Alice Johnson\");",
+                                    "    pm.expect(jsonData.email).to.eql(\"alice.johnson@example.com\");",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice.johnson@example.com\",\n  \"position\": \"Software Engineer\",\n  \"salary\": 80000\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}/employees",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}",
+                                "employees"
+                            ]
+                        },
+                        "description": "Create a new employee (requires ADMIN or HR role)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Employee",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Employee updated\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.salary).to.eql(85000);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice.johnson@example.com\",\n  \"position\": \"Senior Software Engineer\",\n  \"salary\": 85000\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}/employees/{{employee_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}",
+                                "employees",
+                                "{{employee_id}}"
+                            ]
+                        },
+                        "description": "Update an existing employee (requires ADMIN or HR role)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Employee",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 204\", function () {",
+                                    "    pm.response.to.have.status(204);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/departments/{{department_id}}/employees/{{employee_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "departments",
+                                "{{department_id}}",
+                                "employees",
+                                "{{employee_id}}"
+                            ]
+                        },
+                        "description": "Delete an employee (requires ADMIN role)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Group Employees by Department",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Response is object with department keys\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData).to.be.an('object');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/employees/grouped",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "employees",
+                                "grouped"
+                            ]
+                        },
+                        "description": "Get employees grouped by department"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Salary Summary by Department",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Salary totals calculated\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData).to.be.an('object');",
+                                    "    Object.values(jsonData).forEach(function(salary) {",
+                                    "        pm.expect(salary).to.be.a('number');",
+                                    "    });",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/employees/salary-summary",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "employees",
+                                "salary-summary"
+                            ]
+                        },
+                        "description": "Get total salary by department (requires ADMIN or HR role)"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Employee management endpoints"
+        },
+        {
+            "name": "Reports",
+            "item": [
+                {
+                    "name": "Generate Department Report PDF",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Response is PDF\", function () {",
+                                    "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/pdf');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/reports/departments",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "reports",
+                                "departments"
+                            ]
+                        },
+                        "description": "Generate PDF report with all departments and employees (requires ADMIN or HR role)"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Report generation endpoints"
+        },
+        {
+            "name": "Health Check",
+            "item": [
+                {
+                    "name": "Actuator Health",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test(\"Application is UP\", function () {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.expect(jsonData.status).to.eql(\"UP\");",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/actuator/health",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "actuator",
+                                "health"
+                            ]
+                        },
+                        "description": "Check application health status"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Application health and monitoring endpoints"
+        }
+    ]
+}

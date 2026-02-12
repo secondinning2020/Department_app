@@ -1,0 +1,200 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.enterprise:department-management >----------------
+[INFO] Building Department Management System 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ department-management ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ department-management ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ department-management ---
+[INFO] skip non existing resourceDirectory C:\Users\Asus\Downloads\ASPDepartment\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ department-management ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ department-management ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.enterprise.department.security.JwtTokenProviderTest
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+00:05:49.314 [main] ERROR com.enterprise.department.security.JwtTokenProvider -- JWT token validation error: JWT expired 1312 milliseconds ago at 2026-02-11T18:35:48.000Z. Current time: 2026-02-11T18:35:49.312Z. Allowed clock skew: 0 milliseconds.
+00:05:49.320 [main] ERROR com.enterprise.department.security.JwtTokenProvider -- JWT token validation error: Malformed protected header JSON: Unable to deserialize: Unexpected character ('?' (code 65533 / 0xfffd)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (InputStreamReader); line: 1, column: 2]
+00:05:49.346 [main] ERROR com.enterprise.department.security.JwtTokenProvider -- JWT token validation error: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+00:05:49.349 [main] ERROR com.enterprise.department.security.JwtTokenProvider -- JWT token validation error: CharSequence cannot be null or empty.
+00:05:49.354 [main] WARN com.enterprise.department.security.JwtTokenProvider -- JWT token validation failed for user: testuser
+00:05:49.355 [main] ERROR com.enterprise.department.security.JwtTokenProvider -- JWT token validation error: CharSequence cannot be null or empty.
+[ERROR] Tests run: 15, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.488 s <<< FAILURE! -- in com.enterprise.department.security.JwtTokenProviderTest
+[ERROR] com.enterprise.department.security.JwtTokenProviderTest.generateToken_ShouldSetIssuedAtDate -- Time elapsed: 0.014 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at com.enterprise.department.security.JwtTokenProviderTest.generateToken_ShouldSetIssuedAtDate(JwtTokenProviderTest.java:258)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] Running com.enterprise.department.service.AuthServiceTest
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+00:05:50.396 [main] INFO com.enterprise.department.service.AuthService -- Registering new user: newuser with role: HR
+00:05:50.402 [main] INFO com.enterprise.department.service.AuthService -- User registered successfully: newuser
+00:05:50.456 [main] INFO com.enterprise.department.service.AuthService -- Authenticating user: testuser
+00:05:50.463 [main] INFO com.enterprise.department.service.AuthService -- Registering new user: admin2 with role: ADMIN
+00:05:50.463 [main] INFO com.enterprise.department.service.AuthService -- User registered successfully: admin2
+00:05:50.468 [main] INFO com.enterprise.department.service.AuthService -- Registering new user: existinguser with role: EMPLOYEE
+00:05:50.473 [main] INFO com.enterprise.department.service.AuthService -- Authenticating user: testuser
+00:05:50.474 [main] INFO com.enterprise.department.service.AuthService -- User authenticated successfully: testuser
+00:05:50.483 [main] INFO com.enterprise.department.service.AuthService -- Authenticating user: testuser
+00:05:50.483 [main] INFO com.enterprise.department.service.AuthService -- User authenticated successfully: testuser
+00:05:50.489 [main] INFO com.enterprise.department.service.AuthService -- Registering new user: newuser with role: EMPLOYEE
+00:05:50.489 [main] INFO com.enterprise.department.service.AuthService -- User registered successfully: newuser
+00:05:50.496 [main] INFO com.enterprise.department.service.AuthService -- Authenticating user: testuser
+00:05:50.501 [main] INFO com.enterprise.department.service.AuthService -- Registering new user: newuser with role: ADMIN
+00:05:50.501 [main] INFO com.enterprise.department.service.AuthService -- User registered successfully: newuser
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.133 s -- in com.enterprise.department.service.AuthServiceTest
+[INFO] Running com.enterprise.department.service.DepartmentServiceImplTest
+00:05:50.570 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Creating new department: IT Department
+00:05:50.571 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Department created successfully with id: dept-123
+00:05:50.576 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Deleting department with id: dept-123
+00:05:50.578 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Department deleted successfully: IT Department
+00:05:50.580 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Updating department with id: invalid-id
+00:05:50.583 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Deleting department with id: invalid-id
+00:05:50.586 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Creating new department: IT Department
+00:05:50.587 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Department created successfully with id: dept-123
+00:05:50.589 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Fetching department with id: invalid-id
+00:05:50.592 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Updating department with id: dept-123
+00:05:50.592 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Department updated successfully: IT Department
+00:05:50.594 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Fetching all departments
+00:05:50.594 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Found 1 departments
+00:05:50.597 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Updating department with id: dept-123
+00:05:50.597 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Department updated successfully: IT Department
+00:05:50.599 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Fetching department with id: dept-123
+00:05:50.599 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Found department: IT Department
+00:05:50.600 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Fetching all departments
+00:05:50.600 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Found 0 departments
+00:05:50.602 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Deleting department with id: dept-123
+00:05:50.602 [main] INFO com.enterprise.department.service.DepartmentServiceImpl -- Department deleted successfully: IT Department
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 s -- in com.enterprise.department.service.DepartmentServiceImplTest
+[INFO] Running com.enterprise.department.service.EmployeeServiceImplTest
+00:05:50.683 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Fetching employee with id: EMP001
+00:05:50.684 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Found employee: John Doe
+00:05:50.687 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Fetching all employees
+00:05:50.687 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Found 1 employees
+00:05:50.689 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Grouping employees by department
+00:05:50.691 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Grouped 2 employees into 1 departments
+00:05:50.695 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Creating new employee: John Doe in department: dept-123
+00:05:50.696 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Employee created successfully with id: EMP002
+00:05:50.704 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Updating employee with id: EMP001 in department: dept-123
+00:05:50.705 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Employee updated successfully: John Doe
+00:05:50.708 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Fetching employees for department: dept-123
+00:05:50.708 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Found 1 employees in department dept-123
+00:05:50.710 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Deleting employee with id: EMP001 from department: dept-123
+00:05:50.714 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Deleting employee with id: INVALID from department: dept-123
+00:05:50.723 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Fetching employees for department: invalid-id
+00:05:50.725 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Fetching employee with id: INVALID
+00:05:50.728 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Updating employee with id: EMP001 in department: dept-123
+00:05:50.731 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Creating new employee: John Doe in department: invalid-dept
+00:05:50.733 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Creating new employee: New Employee in department: dept-123
+00:05:50.733 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Employee created successfully with id: EMP003
+00:05:50.736 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Calculating total salary by department
+00:05:50.737 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Calculated salary for 1 departments
+00:05:50.739 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Calculating total salary by department
+00:05:50.739 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Calculated salary for 0 departments
+00:05:50.741 [main] INFO com.enterprise.department.service.EmployeeServiceImpl -- Creating new employee: John Doe in department: dept-123
+[ERROR] Tests run: 16, Failures: 2, Errors: 2, Skipped: 0, Time elapsed: 0.132 s <<< FAILURE! -- in com.enterprise.department.service.EmployeeServiceImplTest
+[ERROR] com.enterprise.department.service.EmployeeServiceImplTest.groupEmployeesByDepartment_ShouldReturnGroupedMap -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at com.enterprise.department.service.EmployeeServiceImplTest.groupEmployeesByDepartment_ShouldReturnGroupedMap(EmployeeServiceImplTest.java:295)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithValidId_ShouldDeleteEmployee -- Time elapsed: 0.002 s <<< ERROR!
+com.enterprise.department.exception.EntityNotFoundException: Department not found with id: dept-123
+	at com.enterprise.department.service.EmployeeServiceImpl.deleteEmployee(EmployeeServiceImpl.java:152)
+	at com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithValidId_ShouldDeleteEmployee(EmployeeServiceImplTest.java:259)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithInvalidId_ShouldThrowException -- Time elapsed: 0.008 s <<< ERROR!
+org.mockito.exceptions.misusing.UnnecessaryStubbingException: 
+
+Unnecessary stubbings detected.
+Clean & maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+  1. -> at com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithInvalidId_ShouldThrowException(EmployeeServiceImplTest.java:269)
+  2. -> at com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithInvalidId_ShouldThrowException(EmployeeServiceImplTest.java:270)
+Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
+	at org.mockito.junit.jupiter.MockitoExtension.afterEach(MockitoExtension.java:192)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] com.enterprise.department.service.EmployeeServiceImplTest.calculateTotalSalaryByDepartment_ShouldReturnSalaryMap -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at com.enterprise.department.service.EmployeeServiceImplTest.calculateTotalSalaryByDepartment_ShouldReturnSalaryMap(EmployeeServiceImplTest.java:316)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   JwtTokenProviderTest.generateToken_ShouldSetIssuedAtDate:258 expected: <true> but was: <false>
+[ERROR]   EmployeeServiceImplTest.calculateTotalSalaryByDepartment_ShouldReturnSalaryMap:316 expected: <true> but was: <false>
+[ERROR]   EmployeeServiceImplTest.groupEmployeesByDepartment_ShouldReturnGroupedMap:295 expected: <true> but was: <false>
+[ERROR] Errors: 
+[ERROR]   EmployeeServiceImplTest.deleteEmployee_WithInvalidId_ShouldThrowException ╗ UnnecessaryStubbing 
+Unnecessary stubbings detected.
+Clean & maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+  1. -> at com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithInvalidId_ShouldThrowException(EmployeeServiceImplTest.java:269)
+  2. -> at com.enterprise.department.service.EmployeeServiceImplTest.deleteEmployee_WithInvalidId_ShouldThrowException(EmployeeServiceImplTest.java:270)
+Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
+[ERROR]   EmployeeServiceImplTest.deleteEmployee_WithValidId_ShouldDeleteEmployee:259 ╗ EntityNotFound Department not found with id: dept-123
+[INFO] 
+[ERROR] Tests run: 53, Failures: 3, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.307 s
+[INFO] Finished at: 2026-02-12T00:05:50+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.1.2:test (default-test) on project department-management: There are test failures.
+[ERROR] 
+[ERROR] Please refer to C:\Users\Asus\Downloads\ASPDepartment\backend\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
