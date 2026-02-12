@@ -194,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: AppConstants.bodyStyle.copyWith(fontSize: 12),
                         ),
                         Text(
-                          'HR: hr / hr123',
+                          'HR: hradmin / hradmin123',
                           style: AppConstants.bodyStyle.copyWith(fontSize: 12),
                         ),
                       ],

@@ -61,15 +61,15 @@ public class DataInitializer {
 
         // HR user
         User hr = new User();
-        hr.setUsername("hr");
-        hr.setPassword(passwordEncoder.encode("hr123"));
+        hr.setUsername("hradmin");
+        hr.setPassword(passwordEncoder.encode("hradmin123"));
         hr.setRole(User.Role.HR);
         hr.setEnabled(true);
         hr.setAccountNonExpired(true);
         hr.setAccountNonLocked(true);
         hr.setCredentialsNonExpired(true);
         userRepository.save(hr);
-        log.info("Created HR user: hr/hr123");
+        log.info("Created HR user: hradmin/hradmin123");
 
         // Employee user
         User employee = new User();
